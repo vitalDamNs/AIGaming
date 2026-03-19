@@ -5,9 +5,9 @@ import ale_py
 '''
 这一段是用来是检查torch环境，包括是否支持cuda。
 '''
-# print(torch.__version__)
-# print(torch.version.cuda)
-# print(torch.cuda.is_available())
+print(torch.__version__)
+print(torch.version.cuda)
+print(torch.cuda.is_available())
 
 '''
 这一段是用来检查gym环境，特别是ALE环境是否正确注册和可用。
