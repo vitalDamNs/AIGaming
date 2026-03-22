@@ -8,9 +8,9 @@ class Learning:
     '''
     学习类，包含了学习相关的函数和属性。
     '''
-    def __init__(self,env,algorithm='DQN',verbose=0,total_timesteps=10,cnnPolicy=True,device='cuda'):
+    def __init__(self,env,algorithm='DQN',verbose=0,total_timesteps=10,cnnPolicy=True,device='cuda',Game_name=''):
         '''
-        初始化学习类，设置环境、算法和是否打印日志。
+        初始化学习类
         '''
         self.algorithm=algorithm
         self.verbose=verbose
@@ -19,6 +19,7 @@ class Learning:
         self.algorithm=algorithm
         self.cnnPolicy=cnnPolicy
         self.device=device
+        self.Game_name=Game_name
 
     def learn(self):
         '''
@@ -31,18 +32,20 @@ class Learning:
         if self.algorithm=='DQN':
             if self.cnnPolicy:
                 model=DQN('CnnPolicy',self.env,verbose=self.verbose,device=self.device)
-                print(model.policy.device)
+                # print(model.policy.device)
             else:
                 model=DQN('MlpPolicy',self.env,verbose=self.verbose,device=self.device)
-                print(model.policy.device)
+                # print(model.policy.device)
             model.learn(total_timesteps=self.total_timesteps)
+            model.save(self.Game_name+'_DQN_model')# 保存模型在当前目录下
+            return '学习完成，模型已保存为'+self.Game_name+'_DQN_model.zip'
 
 '''
 这一段是用来测试学习模块的功能，主要是判断是否能够在cuda环境下正常运行，并且能够正确地使用DQN算法进行学习。
 在这个测试中，我们创建了一个Taxi-v3环境，并使用DQN算法进行学习。
 '''
-if __name__=='__main__': 
-    env=gym.make('Taxi-v3', render_mode="human")
-    learning_model=Learning(env,algorithm='DQN',verbose=1,total_timesteps=10000,cnnPolicy=False,device='cuda')
-    learning_model.learn()
-    env.close()
+# if __name__=='__main__': 
+#     env=gym.make('Taxi-v3', render_mode="human")
+#     learning_model=Learning(env,algorithm='DQN',verbose=1,total_timesteps=10000,cnnPolicy=False,device='cuda')
+#     learning_model.learn()
+#     env.close()
