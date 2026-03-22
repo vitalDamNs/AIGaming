@@ -31,10 +31,18 @@ class Learning:
         
         if self.algorithm=='DQN':
             if self.cnnPolicy:
-                model=DQN('CnnPolicy',self.env,verbose=self.verbose,device=self.device)
+                model=DQN('CnnPolicy',self.env,verbose=self.verbose,device=self.device,
+                        buffer_size=100000,
+                         learning_starts=1000,
+                         batch_size=32,
+                         learning_rate=1e-4)
                 # print(model.policy.device)
             else:
-                model=DQN('MlpPolicy',self.env,verbose=self.verbose,device=self.device)
+                model=DQN('CnnPolicy',self.env,verbose=self.verbose,device=self.device,
+                        buffer_size=100000,
+                         learning_starts=1000,
+                         batch_size=32,
+                         learning_rate=1e-4)
                 # print(model.policy.device)
             model.learn(total_timesteps=self.total_timesteps)
             model.save(self.Game_name+'_DQN_model')# 保存模型在当前目录下
