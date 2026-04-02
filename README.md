@@ -46,6 +46,8 @@ gym.register_envs(ale_py)
 # env=gym.make('ALE/Tetris-v5', render_mode='human')
 env = gym.make('ALE/Tetris-v5', continuous=True, render_mode="human")
 #continuous=True表示环境将持续运行，直到游戏结束，而不是在每一步后重置。
+# env = make_atari_env('ALE/Tetris-v5', n_envs=1, seed=0)
+# env = VecFrameStack(env, n_stack=4)
 
 obs,info=env.reset()
 episode_over=False
@@ -62,5 +64,15 @@ while not episode_over:
     episode_over = terminated or truncated
 
 env.close()
+```
+
+请运行`GameEnv.py`文件的第三部分，用以确认你所在的设备硬件情况（例如CPU内核数量等，以便之后训练时采用多线程加快训练速度）
+
+```Python
+'''
+这一段是用来检查电脑的硬件环境，例如cpu核心数量等。
+'''
+print('CPU核心数量：',os.cpu_count())
+print('多进程数量：',multiprocessing.cpu_count())
 ```
 
