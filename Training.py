@@ -15,7 +15,6 @@ Train_env = VecFrameStack(Train_env, n_stack=4)
 print('训练开始')
 train_model=Learning(
     env=Train_env,
-    Game_name='Tetris',
     tensorboard_log=r'D:\LLM\AIGaming\Train2\Train2_logs',
     model_path=r'D:\LLM\Models\Tetris_DQN_model_2.zip'
 )

@@ -13,7 +13,7 @@ class Learning:
     '''
     def __init__(self,Policy='CnnPolicy',
                  env=None,
-                 learning_rate='1e-4',
+                 learning_rate=1e-4,
                  buffer_size=100000,
                  learning_starts=50000,
                  batch_size=32,tau=1.0,
